@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  node-red:
+    image: nodered/node-red
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered_data:/data
+    networks:
+      - custom_network
+
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - custom_network
+    depends_on:
+      - node-red
+
+networks:
+  custom_network:
+    driver: bridge
+
+volumes:
+  nodered_data:
+    driver: local

@@ -1,0 +1,14 @@
+Сборка Docker образа с помощью команды docker build
+docker build -t my-nginx .
+
+Создание сети Docker с именем MyNetwork
+docker network create MyNetwork
+
+Запуск контейнера Nginx из созданного образа в сети MyNetwork
+docker run -d --name nginx-container --network MyNetwork my-nginx
+
+Запуск контейнера Ubuntu в той же сети MyNetwork
+docker run -it --name ubuntu-container --network MyNetwork ubuntu /bin/bash
+
+Проверка
+curl nginx-container:8080
